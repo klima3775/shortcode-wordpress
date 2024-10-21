@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mini Wizard - Done</title>
+    <!-- Підключення Bootstrap 5 -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Підключення шрифту Inter -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f8f9fa;
+      }
+      .wizard-container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 30px;
+        background-color: #e9ecef;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .breadcrumb {
+        background-color: transparent;
+        padding: 0;
+        margin-bottom: 20px;
+      }
+      .btn-start-again {
+        background-color: #6c63ff;
+        color: #fff;
+        border: none;
+      }
+      .btn-start-again:hover {
+        background-color: #5a54cc;
+      }
+      .success-message {
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+      }
+      .success-message i {
+        color: green;
+        margin-right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wizard-container">
+      <!-- Breadcrumb -->
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item">Contact Info</li>
+          <li class="breadcrumb-item">Quantity</li>
+          <li class="breadcrumb-item">Price</li>
+          <li class="breadcrumb-item active" aria-current="page">Done</li>
+        </ol>
+      </nav>
+
+      <!-- Done Screen -->
+      <h2>Done</h2>
+      <div class="success-message">
+        <i class="bi bi-check-circle-fill"></i>
+        <span>Your email was sent successfully</span>
+      </div>
+      <button type="button" class="btn btn-start-again mt-4">
+        Start again →
+      </button>
+    </div>
+
+    <!-- Підключення Bootstrap 5 JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <!-- Підключення іконок Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css"
+    />
+  </body>
+</html>
