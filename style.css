@@ -2,8 +2,17 @@ body {
   font-family: "Inter", sans-serif;
   background-color: #f8f9fa;
 }
+
+.info {
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 48px;
+  letter-spacing: -2.14px;
+  text-align: left;
+}
 .wizard-container {
-  max-width: 600px;
+  width: 770px;
+  height: 470px;
   margin: 50px auto;
   padding: 30px;
   background-color: #e9ecef;
