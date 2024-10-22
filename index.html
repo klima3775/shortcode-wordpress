@@ -70,7 +70,7 @@
             aria-current="page"
             data-target="form1"
           >
-            Contact Info
+            <a href="#" data-target="form1">Contact Info</a>
           </li>
           <li class="breadcrumb-item">
             <a href="#" data-target="form2">Quantity</a>
@@ -93,7 +93,9 @@
             <input type="text" class="form-control" id="name" required />
           </div>
           <div class="form-group">
-            <label for="email" class="form-label">Email</label>
+            <label for="email" class="form-label"
+              >Email <span class="text-danger">required</span></label
+            >
             <input type="email" class="form-control" id="email" required />
           </div>
           <div class="form-group">
@@ -109,7 +111,9 @@
         <h2>Quantity</h2>
         <form id="quantityForm">
           <div class="form-group">
-            <label for="quantity" class="form-label">Quantity</label>
+            <label for="quantity" class="form-label"
+              >Quantity <span class="text-danger">required</span></label
+            >
             <input type="number" class="form-control" id="quantity" required />
           </div>
           <button type="button" class="btn btn-continue">Continue</button>
@@ -137,6 +141,7 @@
 
     <!-- Підключення Bootstrap 5 JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Перехід по посиланням -->
     <script>
       document.querySelectorAll(".breadcrumb-item a").forEach((item) => {
         item.addEventListener("click", (event) => {
