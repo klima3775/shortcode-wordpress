@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mini Wizard - Step 1</title>
-    <!-- Підключення Bootstrap 5 -->
+    <!-- Bootstrap 5 -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <!-- Підключення шрифту Inter -->
+    <!-- Inter Font -->
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
       rel="stylesheet"
@@ -39,7 +39,7 @@
       }
       .form-group label {
         margin-right: 1rem;
-        min-width: 100px; /* Adjust as needed */
+        min-width: 100px;
       }
       .form-group input {
         flex: 1;
@@ -62,7 +62,7 @@
         text-align: left;
       }
       .btn-send {
-        background-color:  #4F46E5;
+        background-color: #4f46e5;
         color: #fff;
         border: none;
         padding: 10px 20px;
@@ -72,14 +72,14 @@
       }
       .btn-back {
         background-color: #f8f9fa;
-        color: #4F46E5 ;
+        color: #4f46e5;
         border: none;
         padding: 10px 20px;
       }
       .btn-back:hover {
         background-color: #e2e6ea;
       }
-     .success-message {
+      .success-message {
         display: flex;
         align-items: center;
         margin-top: 20px;
@@ -92,13 +92,13 @@
   </head>
   <body>
     <div class="wizard-container">
-      <!-- Breadcrumb -->
+      <!-- Breadcrumb Navigation -->
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="#" data-target="form1">
-              <img src="./assets/img/home.png" />
-            </a>
+            <a href="#" data-target="form1"
+              ><img src="./assets/img/home.png"
+            /></a>
           </li>
           <li
             class="breadcrumb-item active"
@@ -119,7 +119,7 @@
         </ol>
       </nav>
 
-      <!-- Contact Info Form -->
+      <!-- Step 1: Contact Info -->
       <div id="form1">
         <p class="text">Contact Info</p>
         <form id="contactForm">
@@ -137,11 +137,13 @@
             <label for="phone" class="form-label">Phone</label>
             <input type="tel" class="form-control" id="phone" />
           </div>
-          <button type="button" class="btn btn-send">Continue</button>
+          <button type="button" class="btn btn-send" onclick="goToStep(2)">
+            Continue
+          </button>
         </form>
       </div>
 
-      <!-- Quantity Form -->
+      <!-- Step 2: Quantity -->
       <div id="form2" class="hidden">
         <p class="text">Quantity</p>
         <form id="quantityForm">
@@ -149,50 +151,124 @@
             <label for="quantity" class="form-label"
               >Quantity <span class="text-danger">required</span></label
             >
-            <input type="number" class="form-control" id="quantity" required />
+            <input
+              type="number"
+              class="form-control"
+              id="quantity"
+              min="1"
+              max="1000"
+              required
+            />
           </div>
-          <button type="button" class="btn btn-send">Continue</button>
-          <button type="button" class="btn btn-back">← Back</button>
+          <button type="button" class="btn btn-send" onclick="goToStep(3)">
+            Continue
+          </button>
+          <button type="button" class="btn btn-back" onclick="goToStep(1)">
+            ← Back
+          </button>
         </form>
       </div>
 
-      <!-- Price Form -->
+      <!-- Step 3: Price -->
       <div id="form3" class="hidden">
         <p class="text">Price</p>
-        <p class="text-price">$10</p>
+        <p class="text-price" id="priceDisplay">$0</p>
         <div class="d-flex">
-          <button type="button" class="btn btn-send me-3">Send to Email</button>
-          <button type="button" class="btn btn-back">← Back</button>
+          <button type="button" class="btn btn-send me-3" onclick="sendEmail()">
+            Send to Email
+          </button>
+          <button type="button" class="btn btn-back" onclick="goToStep(2)">
+            ← Back
+          </button>
         </div>
       </div>
 
-      <!-- Done Form -->
+      <!-- Step 4: Done -->
       <div id="form4" class="hidden">
         <h2>Done</h2>
-        <div class="success-message">
-        <i class="bi bi-check-square-fill"></i>
-        <span>Your email was sent successfully</span>
+        <div class="success-message" id="successMessage"></div>
+        <button type="button" class="btn btn-send mt-4" onclick="startAgain()">
+          Start again →
+        </button>
       </div>
-      <button type="button" class="btn btn-send mt-4">Start again →</button>
     </div>
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css"
     />
-    <!-- Підключення Bootstrap 5 JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Перехід по посиланням -->
+
     <script>
+      function goToStep(step) {
+        // Form validation
+        if (
+          step === 2 &&
+          !document.getElementById("contactForm").checkValidity()
+        ) {
+          alert("Please fill in the required fields.");
+          return;
+        }
+        if (
+          step === 3 &&
+          !document.getElementById("quantityForm").checkValidity()
+        ) {
+          alert("Please enter a valid quantity (1-1000).");
+          return;
+        }
+
+        // Calculate price
+        if (step === 3) {
+          const quantity = parseInt(
+            document.getElementById("quantity").value,
+            10
+          );
+          let price = 10;
+          if (quantity > 10 && quantity <= 100) {
+            price = 100;
+          } else if (quantity > 100 && quantity <= 1000) {
+            price = 1000;
+          }
+          document.getElementById("priceDisplay").textContent = `$${price}`;
+        }
+
+        // Show the target form
+        document.querySelectorAll(".wizard-container > div").forEach((form) => {
+          form.classList.add("hidden");
+        });
+        document.getElementById(`form${step}`).classList.remove("hidden");
+      }
+
+      function sendEmail() {
+        // Mock email sending for demonstration
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const phone = document.getElementById("phone").value;
+        const quantity = document.getElementById("quantity").value;
+        const price = document.getElementById("priceDisplay").textContent;
+
+        // Mocking success/failure message
+        const isSuccess = Math.random() > 0.2; // Simulate 80% success rate
+        document.getElementById("successMessage").innerHTML = isSuccess
+          ? `<i class="bi bi-check-square-fill"></i> <span>Your email was sent successfully</span>`
+          : `<i class="bi bi-x-square-fill"></i> <span>Failed to send the email. Please try again.</span>`;
+
+        goToStep(4);
+      }
+
+      function startAgain() {
+        // Clear all form fields
+        document.getElementById("contactForm").reset();
+        document.getElementById("quantityForm").reset();
+        document.getElementById("priceDisplay").textContent = "$0";
+        goToStep(1);
+      }
+
       document.querySelectorAll(".breadcrumb-item a").forEach((item) => {
         item.addEventListener("click", (event) => {
           event.preventDefault();
           const targetForm = event.target.getAttribute("data-target");
-          document
-            .querySelectorAll(".wizard-container > div")
-            .forEach((form) => {
-              form.classList.add("hidden");
-            });
-          document.getElementById(targetForm).classList.remove("hidden");
+          goToStep(parseInt(targetForm.charAt(4)));
         });
       });
     </script>
