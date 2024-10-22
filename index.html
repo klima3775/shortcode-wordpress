@@ -32,6 +32,14 @@
         padding: 0;
         margin-bottom: 20px;
       }
+      .breadcrumb-item.completed a {
+        color: #4f46e5;
+        font-weight: bold;
+      }
+      .breadcrumb-item.active a {
+        color: #000;
+        text-decoration: underline;
+      }
       .form-group {
         display: flex;
         align-items: center;
@@ -100,11 +108,7 @@
               ><img src="./assets/img/home.png"
             /></a>
           </li>
-          <li
-            class="breadcrumb-item active"
-            aria-current="page"
-            data-target="form1"
-          >
+          <li class="breadcrumb-item active" aria-current="page">
             <a href="#" data-target="form1">Contact Info</a>
           </li>
           <li class="breadcrumb-item">
@@ -199,78 +203,6 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script>
-      function goToStep(step) {
-        // Form validation
-        if (
-          step === 2 &&
-          !document.getElementById("contactForm").checkValidity()
-        ) {
-          alert("Please fill in the required fields.");
-          return;
-        }
-        if (
-          step === 3 &&
-          !document.getElementById("quantityForm").checkValidity()
-        ) {
-          alert("Please enter a valid quantity (1-1000).");
-          return;
-        }
-
-        // Calculate price
-        if (step === 3) {
-          const quantity = parseInt(
-            document.getElementById("quantity").value,
-            10
-          );
-          let price = 10;
-          if (quantity > 10 && quantity <= 100) {
-            price = 100;
-          } else if (quantity > 100 && quantity <= 1000) {
-            price = 1000;
-          }
-          document.getElementById("priceDisplay").textContent = `$${price}`;
-        }
-
-        // Show the target form
-        document.querySelectorAll(".wizard-container > div").forEach((form) => {
-          form.classList.add("hidden");
-        });
-        document.getElementById(`form${step}`).classList.remove("hidden");
-      }
-
-      function sendEmail() {
-        // Mock email sending for demonstration
-        const name = document.getElementById("name").value;
-        const email = document.getElementById("email").value;
-        const phone = document.getElementById("phone").value;
-        const quantity = document.getElementById("quantity").value;
-        const price = document.getElementById("priceDisplay").textContent;
-
-        // Mocking success/failure message
-        const isSuccess = Math.random() > 0.2; // Simulate 80% success rate
-        document.getElementById("successMessage").innerHTML = isSuccess
-          ? `<i class="bi bi-check-square-fill"></i> <span>Your email was sent successfully</span>`
-          : `<i class="bi bi-x-square-fill"></i> <span>Failed to send the email. Please try again.</span>`;
-
-        goToStep(4);
-      }
-
-      function startAgain() {
-        // Clear all form fields
-        document.getElementById("contactForm").reset();
-        document.getElementById("quantityForm").reset();
-        document.getElementById("priceDisplay").textContent = "$0";
-        goToStep(1);
-      }
-
-      document.querySelectorAll(".breadcrumb-item a").forEach((item) => {
-        item.addEventListener("click", (event) => {
-          event.preventDefault();
-          const targetForm = event.target.getAttribute("data-target");
-          goToStep(parseInt(targetForm.charAt(4)));
-        });
-      });
-    </script>
+    <script src="/index.js"></script>
   </body>
 </html>
