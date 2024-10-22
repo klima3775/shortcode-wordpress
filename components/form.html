@@ -40,6 +40,21 @@
       .btn-continue:hover {
         background-color: #5a54cc;
       }
+      .form-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+      .form-group label {
+        margin-right: 1rem;
+        min-width: 100px; /* Adjust as needed */
+      }
+      .form-group input {
+        flex: 1;
+      }
+      .hidden {
+        display: none;
+      }
     </style>
   </head>
   <body>
@@ -47,38 +62,94 @@
       <!-- Breadcrumb -->
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">
+          <li class="breadcrumb-item">
+            <a href="#" data-target="form1">Home</a>
+          </li>
+          <li
+            class="breadcrumb-item active"
+            aria-current="page"
+            data-target="form1"
+          >
             Contact Info
           </li>
-          <li class="breadcrumb-item">Quantity</li>
-          <li class="breadcrumb-item">Price</li>
-          <li class="breadcrumb-item">Done</li>
+          <li class="breadcrumb-item">
+            <a href="#" data-target="form2">Quantity</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="#" data-target="form3">Price</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="#" data-target="form4">Done</a>
+          </li>
         </ol>
       </nav>
 
       <!-- Contact Info Form -->
-      <h2>Contact Info</h2>
-      <form id="contactForm">
-        <div class="mb-3">
-          <label for="name" class="form-label">Name</label>
-          <input type="text" class="form-control" id="name" required />
-        </div>
-        <div class="mb-3">
-          <label for="email" class="form-label"
-            >Email <span class="text-danger">required</span></label
-          >
-          <input type="email" class="form-control" id="email" required />
-        </div>
-        <div class="mb-3">
-          <label for="phone" class="form-label">Phone</label>
-          <input type="tel" class="form-control" id="phone" />
-        </div>
-        <button type="button" class="btn btn-continue">Continue</button>
-      </form>
+      <div id="form1">
+        <h2>Contact Info</h2>
+        <form id="contactForm">
+          <div class="form-group">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" required />
+          </div>
+          <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" required />
+          </div>
+          <div class="form-group">
+            <label for="phone" class="form-label">Phone</label>
+            <input type="tel" class="form-control" id="phone" />
+          </div>
+          <button type="button" class="btn btn-continue">Continue</button>
+        </form>
+      </div>
+
+      <!-- Quantity Form -->
+      <div id="form2" class="hidden">
+        <h2>Quantity</h2>
+        <form id="quantityForm">
+          <div class="form-group">
+            <label for="quantity" class="form-label">Quantity</label>
+            <input type="number" class="form-control" id="quantity" required />
+          </div>
+          <button type="button" class="btn btn-continue">Continue</button>
+        </form>
+      </div>
+
+      <!-- Price Form -->
+      <div id="form3" class="hidden">
+        <h2>Price</h2>
+        <form id="priceForm">
+          <div class="form-group">
+            <label for="price" class="form-label">Price</label>
+            <input type="number" class="form-control" id="price" required />
+          </div>
+          <button type="button" class="btn btn-continue">Continue</button>
+        </form>
+      </div>
+
+      <!-- Done Form -->
+      <div id="form4" class="hidden">
+        <h2>Done</h2>
+        <p>Thank you for completing the form!</p>
+      </div>
     </div>
 
     <!-- Підключення Bootstrap 5 JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.querySelectorAll(".breadcrumb-item a").forEach((item) => {
+        item.addEventListener("click", (event) => {
+          event.preventDefault();
+          const targetForm = event.target.getAttribute("data-target");
+          document
+            .querySelectorAll(".wizard-container > div")
+            .forEach((form) => {
+              form.classList.add("hidden");
+            });
+          document.getElementById(targetForm).classList.remove("hidden");
+        });
+      });
+    </script>
   </body>
 </html>
