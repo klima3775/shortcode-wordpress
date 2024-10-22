@@ -32,14 +32,6 @@
         padding: 0;
         margin-bottom: 20px;
       }
-      .btn-continue {
-        background-color: #6c63ff;
-        color: #fff;
-        border: none;
-      }
-      .btn-continue:hover {
-        background-color: #5a54cc;
-      }
       .form-group {
         display: flex;
         align-items: center;
@@ -55,6 +47,47 @@
       .hidden {
         display: none;
       }
+      .text {
+        font-size: 48px;
+        font-weight: 600;
+        line-height: 48px;
+        letter-spacing: -2.14px;
+        text-align: left;
+      }
+      .text-price {
+        font-size: 90px;
+        font-weight: 900;
+        line-height: 90px;
+        letter-spacing: -2.14px;
+        text-align: left;
+      }
+      .btn-send {
+        background-color: #6c63ff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+      }
+      .btn-send:hover {
+        background-color: #5a54cc;
+      }
+      .btn-back {
+        background-color: #f8f9fa;
+        color: #6c757d;
+        border: none;
+        padding: 10px 20px;
+      }
+      .btn-back:hover {
+        background-color: #e2e6ea;
+      }
+      .success-message {
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+      }
+      .success-message i {
+        color: green;
+        margin-right: 10px;
+      }
     </style>
   </head>
   <body>
@@ -63,7 +96,9 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="#" data-target="form1">Home</a>
+            <a href="#" data-target="form1">
+              <img src="./assets/img/home.png" />
+            </a>
           </li>
           <li
             class="breadcrumb-item active"
@@ -86,7 +121,7 @@
 
       <!-- Contact Info Form -->
       <div id="form1">
-        <h2>Contact Info</h2>
+        <p class="text">Contact Info</p>
         <form id="contactForm">
           <div class="form-group">
             <label for="name" class="form-label">Name</label>
@@ -102,13 +137,13 @@
             <label for="phone" class="form-label">Phone</label>
             <input type="tel" class="form-control" id="phone" />
           </div>
-          <button type="button" class="btn btn-continue">Continue</button>
+          <button type="button" class="btn btn-send">Continue</button>
         </form>
       </div>
 
       <!-- Quantity Form -->
       <div id="form2" class="hidden">
-        <h2>Quantity</h2>
+        <p class="text">Quantity</p>
         <form id="quantityForm">
           <div class="form-group">
             <label for="quantity" class="form-label"
@@ -116,26 +151,29 @@
             >
             <input type="number" class="form-control" id="quantity" required />
           </div>
-          <button type="button" class="btn btn-continue">Continue</button>
+          <button type="button" class="btn btn-send">Continue</button>
+          <button type="button" class="btn btn-back">← Back</button>
         </form>
       </div>
 
       <!-- Price Form -->
       <div id="form3" class="hidden">
-        <h2>Price</h2>
-        <form id="priceForm">
-          <div class="form-group">
-            <label for="price" class="form-label">Price</label>
-            <input type="number" class="form-control" id="price" required />
-          </div>
-          <button type="button" class="btn btn-continue">Continue</button>
-        </form>
+        <p class="text">Price</p>
+        <p class="text-price">$10</p>
+        <div class="d-flex">
+          <button type="button" class="btn btn-send me-3">Send to Email</button>
+          <button type="button" class="btn btn-back">← Back</button>
+        </div>
       </div>
 
       <!-- Done Form -->
       <div id="form4" class="hidden">
         <h2>Done</h2>
-        <p>Thank you for completing the form!</p>
+        <div class="success-message">
+          <i class="bi bi-check-circle-fill"></i>
+          <span>Your email was sent successfully</span>
+        </div>
+        <button type="button" class="btn btn-send mt-4">Start again →</button>
       </div>
     </div>
 
