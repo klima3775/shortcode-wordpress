@@ -103,11 +103,6 @@
       <!-- Breadcrumb Navigation -->
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="#" data-target="form1"
-              ><img src="./assets/img/home.png"
-            /></a>
-          </li>
           <li class="breadcrumb-item active" aria-current="page">
             <a href="#" data-target="form1">Contact Info</a>
           </li>
@@ -139,7 +134,14 @@
           </div>
           <div class="form-group">
             <label for="phone" class="form-label">Phone</label>
-            <input type="tel" class="form-control" id="phone" />
+            <input
+              type="tel"
+              class="form-control"
+              id="phone"
+              pattern="\+380\d{9}"
+              placeholder="+38"
+              required
+            />
           </div>
           <button type="button" class="btn btn-send" onclick="goToStep(2)">
             Continue
@@ -202,7 +204,6 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css"
     />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
     <script src="/index.js"></script>
   </body>
 </html>

@@ -1,14 +1,33 @@
+//
 function goToStep(step) {
-  if (step === 2 && !document.getElementById("contactForm").checkValidity()) {
-    alert("Please fill in the required fields.");
-    return;
-  }
-  if (step === 3 && !document.getElementById("quantityForm").checkValidity()) {
-    alert("Please enter a valid quantity (1-1000).");
-    return;
+  if (step === 2) {
+    // Проверка валидности контактной формы
+    const contactForm = document.getElementById("contactForm");
+    const email = document.getElementById("email").value;
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/; // Здесь добавляем ваш шаблон
+
+    // Проверка валидности email
+    if (!contactForm.checkValidity() || !emailPattern.test(email)) {
+      if (!contactForm.checkValidity()) {
+        contactForm.reportValidity();
+      } else {
+        alert(
+          "Пожалуйста, введите действительный адрес электронной почты: например, klima3775@gmail.com"
+        );
+      }
+      return;
+    }
   }
 
   if (step === 3) {
+    // Проверка валидности формы количества
+    const quantityForm = document.getElementById("quantityForm");
+    if (!quantityForm.checkValidity()) {
+      quantityForm.reportValidity();
+      return;
+    }
+
+    // Расчет цены
     const quantity = parseInt(document.getElementById("quantity").value);
     let price = 0;
     if (quantity > 10 && quantity <= 100) {
@@ -21,6 +40,7 @@ function goToStep(step) {
     document.getElementById("priceDisplay").textContent = `$${price}`;
   }
 
+  // Обновление состояния навигации хлебной крошки
   document.querySelectorAll(".breadcrumb-item").forEach((item, index) => {
     if (index < step) {
       item.classList.add("completed");
@@ -30,6 +50,7 @@ function goToStep(step) {
     item.classList.toggle("active", index === step - 1);
   });
 
+  // Показать текущую форму и скрыть другие
   document.querySelectorAll(".wizard-container > div").forEach((form) => {
     form.classList.add("hidden");
   });
@@ -41,7 +62,7 @@ function sendEmail() {
   const message = "Email sent successfully!";
   document.getElementById(
     "successMessage"
-  ).innerHTML = `<i class="bi bi-check-circle"></i> ${message}`;
+  ).innerHTML = `<i class="bi bi-check-square-fill"></i> ${message}`;
   goToStep(4); // Go to done step
 }
 
@@ -58,12 +79,14 @@ function startAgain() {
     item.classList.remove("completed", "active");
   });
   document
-    .querySelector(".breadcrumb-item.active a")
-    .classList.remove("active");
-  document
-    .querySelector(".breadcrumb-item:nth-child(2) a")
+    .querySelector(".breadcrumb-item:nth-child(2)")
     .classList.add("active");
 }
+
+// Prevent default action for home button
+document.getElementById("homeButton").addEventListener("click", (event) => {
+  event.preventDefault();
+});
 
 // Initialize the wizard
 goToStep(1);
